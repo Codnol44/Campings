@@ -1,5 +1,7 @@
 # Campings
 
+Précision : connexion sur port 8080.
+
 ![Screenshot](capture4.png)
 
 Description :
