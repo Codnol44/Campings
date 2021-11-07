@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Camping</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+<body>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout" />
+	</form>
+	<div class="container">
+		
+			<h2>Nouveau camping :</h2><br><br>
+			<form class="table table-striped" method="post" th:object="${camping}" th:action="@{/camping}" enctype="multipart/form-data">
+				<ul>
+					<li>
+						<label for="titre">Nom du camping</label>
+						<input type="text" id="nom" th:field="*{nom}" required/>
+					</li><br>
+					<li>
+						<label for="titre">Date arrivee</label>
+						<input type="date" id="dateArrivee" th:field="*{dateArrivee}" required/>
+					</li><br>
+					<li>
+						<label for="titre">Date depart</label>
+						<input type="date" id="dateDepart" th:field="*{dateDepart}" required/>
+					</li><br>
+					<li>
+        				<label>Ville</label>
+      					<select class="form-control" required th:field="*{ville}" >
+      					<option th:each="ville:${@campingContextApplication.getVilles()}" 
+      		        	th:value="${ville.idV}" th:text="${ville.nom}"></option>
+      					</select>
+					</li><br>
+
+					<li>
+					    <label>Etoiles</label>
+      					<select class="form-control" required th:field="*{etoile}" >
+      					<option th:each="etoile:${@campingContextApplication.getEtoiles()}" 
+      					th:value="${etoile.idE}" th:text="${etoile.nombre}"></option>
+      					</select> 
+					</li>
+					<li>
+    					<label>Activité</label>
+    					<input type="file" name="image" accept="image/jpg" />
+					</li>
+				</ul>
+				<input type="submit" value="Valider">
+			</form>
+			
+			<div class="table table-striped">
+				<a th:href="@{/accueil}">Retour a l'accueil</a>
+			</div>
+	</div>
+		
+</body>
+</html>

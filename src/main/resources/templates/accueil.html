@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Accueil</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+<body>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout" />
+	</form>
+	<div class="container">
+		<h1>Bienvenue au camping paradise !</h1>
+		<br>
+		<br>
+		<br>
+		<form class="btn btn-success" method="get" th:action="@{/liste}">
+	        <button type="submit">Liste des campings</button>
+	    </form>
+	    <form class="btn btn-primary" method="get" th:action="@{/camping}">
+	        <button type="submit">Ajouter un camping</button>
+        </form>
+    </div>
+    	
+</body>
+</html>

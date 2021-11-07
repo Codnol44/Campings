@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Liste</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+<body>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout" />
+	</form>
+	<div class="container">
+		
+			<h2>Liste des campings :</h2><br><br>
+			<table class="table table-striped">
+				<tr>
+					<th>Nom du camping</th>
+					<th>Date arrivee</th>
+					<th>Date depart</th>
+					<th>Ville</th>
+					<th>Departement</th>
+					<th>Nombre d'etoiles</th>
+					<th>Activité</th>
+					<th></th>
+				</tr>
+				
+				<tr th:each="camping: ${liste}">
+					<td th:text="${camping.nom}"></td>
+					<td th:text="${camping.dateArrivee}"></td>
+					<td th:text="${camping.dateDepart}"></td>
+					<td><span th:each="ville: ${camping.ville}" th:text="${ville.nom}"></span></td>
+					<td><span th:each="ville: ${camping.ville}" th:text="${ville.departement}"></span></td>
+					<td><span th:each="etoile: ${camping.etoile}" th:text="${etoile.nombre}"></span></td>
+					<td><img th:src="@{${camping.photosImagePath}}"/></td>
+					<td><a th:href="@{/del(idC=${camping.idC})}">Supprimer ce camping</a></td>
+				</tr>
+			</table>
+		
+			<div class="table table-striped">
+				<a th:href="@{/accueil}">Retour a l'accueil</a>
+			</div>
+	</div>
+
+</body>
+</html>
